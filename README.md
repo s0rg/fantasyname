@@ -3,8 +3,12 @@
 This is a golang implementation of [name generator described at RinkWorks](http://rinkworks.com/namegen/)
 
 # example
+
+How its look like:
 ```go
-    gen, err := fantasyname.Parse("sV'i")
+    import "github.com/s0rg/fantasyname"
+
+    gen, err := fantasyname.Compile("sV'i")
     if err != nil {
         log.Fatal(err)
     }
@@ -12,8 +16,10 @@ This is a golang implementation of [name generator described at RinkWorks](http:
     fmt.Println(gen.String())
 ```
 
+[Here](https://github.com/s0rg/fantasyname/blob/master/_example/main.go) is a full example.
+
+You can run it with `go run _example/main.go` to see results.
+
 # todo
 
-[] test cover
-
-[] better readme
+[] more test cover

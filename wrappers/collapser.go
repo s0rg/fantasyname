@@ -14,10 +14,9 @@ func Collapsed(s fmt.Stringer) fmt.Stringer {
 
 func (clp *collapser) String() string {
 	var (
-		oidx      int
 		cur, prev rune
 		rres      = []rune(clp.s.String())
-		rout      = make([]rune, len(rres))
+		rout      = make([]rune, 0, len(rres))
 	)
 
 	for i := 0; i < len(rres); i++ {
@@ -25,9 +24,8 @@ func (clp *collapser) String() string {
 			continue
 		}
 
-		rout[oidx] = cur
+		rout = append(rout, cur)
 		prev = cur
-		oidx++
 	}
 
 	return string(rout)
@@ -36,8 +34,8 @@ func (clp *collapser) String() string {
 func needCollapse(r rune) (yes bool) {
 	switch r {
 	case 'a', 'i', 'u', 'y':
+		return true
 	case 'h', 'j', 'q', 'v', 'w', 'x':
-	default:
 		return true
 	}
 

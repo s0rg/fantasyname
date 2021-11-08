@@ -16,31 +16,16 @@ type state struct {
 	IsGroup   bool
 }
 
-func (s *state) Wrap(w wrapper) {
-	s.wrappers = append(s.wrappers, w)
-}
-
-func (s *state) wrapStringer(v fmt.Stringer) (rv fmt.Stringer) {
-	rv = v
-
-	if len(s.wrappers) > 0 {
-		for i, w := range s.wrappers {
-			rv = w(rv)
-			s.wrappers[i] = nil
-		}
-
-		s.wrappers = s.wrappers[:0]
-	}
-
-	return rv
-}
-
 func (s *state) Add(v fmt.Stringer) {
 	if !s.IsGroup {
-		v = s.wrapStringer(v)
+		v = s.withWrappers(v)
 	}
 
 	s.items = append(s.items, v)
+}
+
+func (s *state) Wrap(w wrapper) {
+	s.wrappers = append(s.wrappers, w)
 }
 
 func (s *state) Split() (rv *state) {
@@ -71,5 +56,20 @@ func (s *state) Stringer() (rv fmt.Stringer) {
 		rv = stringers.Sequence(s.items)
 	}
 
-	return s.wrapStringer(rv)
+	return s.withWrappers(rv)
+}
+
+func (s *state) withWrappers(v fmt.Stringer) (rv fmt.Stringer) {
+	rv = v
+
+	if len(s.wrappers) > 0 {
+		for i, w := range s.wrappers {
+			rv = w(rv)
+			s.wrappers[i] = nil
+		}
+
+		s.wrappers = s.wrappers[:0]
+	}
+
+	return rv
 }

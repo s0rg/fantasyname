@@ -105,7 +105,7 @@ func main() {
 	for i := 0; i < len(templates); i++ {
 		t := &templates[i]
 
-		gen, err := fn.Parse(t.Tmpl)
+		gen, err := fn.Compile(t.Tmpl)
 		if err != nil {
 			log.Fatal(t.Name, err)
 		}

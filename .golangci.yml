@@ -20,6 +20,7 @@ linters:
     - goerr113
     - misspell
     - gofumpt
+    - cyclop
     - gomnd
     - dupl
     - gci

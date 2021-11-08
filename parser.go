@@ -9,9 +9,12 @@ import (
 )
 
 var (
-	ErrEmptyStack      = errors.New("stack is empty")
-	ErrInvalidSplit    = errors.New("out-of-group split")
-	ErrInvalidGroupEnd = errors.New("unbalanced group")
+	// ErrEmptyStack is returned, if parser counts stack as non-empty, but it was.
+	ErrEmptyStack = errors.New("stack is empty")
+	// ErrInvalidSplit is returned when split - '|' is found in pattern out of any group.
+	ErrInvalidSplit = errors.New("out-of-group split")
+	// ErrUnbalancedGroup is returned when stuck upon unexpected group close/open brackets.
+	ErrUnbalancedGroup = errors.New("unbalanced group")
 )
 
 type parser struct {
@@ -30,7 +33,7 @@ func (p *parser) OnGroupStart(isLiteral bool) {
 	p.stack.Push(state{IsGroup: true, IsLiteral: isLiteral})
 }
 
-func (p *parser) OnGroupEnd() (err error) {
+func (p *parser) OnGroupEnd(isLiteral bool) (err error) {
 	cur, ok := p.stack.Pop()
 	if !ok {
 		return ErrEmptyStack
@@ -39,6 +42,10 @@ func (p *parser) OnGroupEnd() (err error) {
 	top, ok := p.stack.Top()
 	if !ok {
 		return ErrEmptyStack
+	}
+
+	if cur.IsLiteral != isLiteral {
+		return ErrUnbalancedGroup
 	}
 
 	top.Add(cur.Split().Stringer())
@@ -53,7 +60,7 @@ func (p *parser) OnGroupSplit() (err error) {
 	}
 
 	if !top.IsGroup {
-		return ErrInvalidGroupEnd
+		return ErrInvalidSplit
 	}
 
 	top.Split()
@@ -96,39 +103,12 @@ func (p *parser) OnSymbol(r rune) (err error) {
 }
 
 func (p *parser) Build() (s fmt.Stringer, err error) {
-	top, ok := p.stack.Top()
-	if !ok {
-		return nil, ErrEmptyStack
+	if len(p.stack) != 1 {
+		return nil, ErrUnbalancedGroup
 	}
+
+	// no need to check `ok` - its already checked above.
+	top, _ := p.stack.Top()
 
 	return wrappers.Collapsed(top.Stringer()), nil
-}
-
-func Parse(pattern string) (rv fmt.Stringer, err error) {
-	p := newParser()
-
-	for pos, r := range pattern {
-		switch r {
-		case '<':
-			p.OnGroupStart(false)
-		case '(':
-			p.OnGroupStart(true)
-		case '>', ')':
-			err = p.OnGroupEnd()
-		case '|':
-			err = p.OnGroupSplit()
-		case '!':
-			err = p.Wrap(wrappers.Capitalized)
-		case '~':
-			err = p.Wrap(wrappers.Reversed)
-		default:
-			err = p.OnSymbol(r)
-		}
-
-		if err != nil {
-			return nil, fmt.Errorf("pos: %d error: %w", pos, err)
-		}
-	}
-
-	return p.Build()
 }
