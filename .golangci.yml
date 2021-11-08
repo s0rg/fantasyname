@@ -1,0 +1,48 @@
+linters-settings:
+  gocritic:
+    disabled-checks:
+      - commentFormatting
+    enabled-tags:
+      - performance
+      - diagnostic
+      - style
+      - opinionated
+
+linters:
+  enable-all: true
+  disable:
+    - exhaustivestruct
+    - gochecknoglobals
+    - testpackage
+    - exhaustive
+    - varnamelen
+    - forbidigo
+    - goerr113
+    - misspell
+    - gofumpt
+    - gomnd
+    - dupl
+    - gci
+    # deprecated :(
+    - interfacer
+    - scopelint
+    - maligned
+    - golint
+  fast: false
+
+output:
+  format: 'colored-line-number'
+  print-issued-lines: true
+  print-linter-name: true
+
+issues:
+  exclude-rules:
+    - path: stringers/random.go
+      text: "G404" # G402: Use of weak random number generator.
+      linters:
+        - gosec
+    - path: ._test\.go
+      linters:
+        - funlen
+        - ifshort
+        - cyclop
