@@ -7,9 +7,11 @@ import (
 	"github.com/s0rg/fantasyname/wrappers"
 )
 
-// Compile creates fmt.Stringer from pattern, you can call ia as many times as you wish,
-// it will produce new name on every call. Under the hood it uses 'math/rand', so you
-// need to initialize it with seed on your own.
+// Compile creates `fmt.Stringer` from given pattern, you can call it as many times as
+// you wish, it will produce new name on every call.
+//
+// Under the hood it uses `math/rand`, to perform random selection, so you need to
+// initialize it with seed on your own.
 func Compile(pattern string) (rv fmt.Stringer, err error) {
 	if pattern = strings.TrimSpace(pattern); pattern == "" {
 		return nil, ErrEmptyStack
