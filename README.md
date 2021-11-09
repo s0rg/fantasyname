@@ -29,7 +29,3 @@ How its look like:
 [Here](https://github.com/s0rg/fantasyname/blob/master/_example/main.go) is a full example.
 
 You can run it with `go run _example/main.go` to see results.
-
-# todo
-
-[] more test cover

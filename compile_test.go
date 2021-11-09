@@ -2,6 +2,7 @@ package fantasyname
 
 import (
 	"errors"
+	"strings"
 	"testing"
 )
 
@@ -52,6 +53,27 @@ func TestCompileTricky(t *testing.T) {
 	rv := gen.String()
 
 	if rv != val {
+		t.Errorf("unexpected result: '%s'", rv)
+	}
+}
+
+func TestCompileMain(t *testing.T) {
+	t.Parallel()
+
+	const (
+		pat  = "~(foo)c'<s|cvc>!(a)"
+		valp = "A"
+		vals = "oof"
+	)
+
+	gen, err := Compile(pat)
+	if err != nil {
+		t.Errorf("uexpected error: %v", err)
+	}
+
+	rv := gen.String()
+
+	if !strings.HasPrefix(rv, vals) || !strings.HasSuffix(rv, valp) {
 		t.Errorf("unexpected result: '%s'", rv)
 	}
 }

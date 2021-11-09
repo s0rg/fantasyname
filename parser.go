@@ -44,7 +44,7 @@ func (p *parser) OnGroupEnd(isLiteral bool) (err error) {
 		return ErrEmptyStack
 	}
 
-	if cur.IsLiteral != isLiteral {
+	if !cur.IsGroup || cur.IsLiteral != isLiteral {
 		return ErrUnbalancedGroup
 	}
 
