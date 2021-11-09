@@ -23,7 +23,7 @@ How it looks like:
         log.Fatal(err)
     }
 
-    fmt.Println(gen.String())
+    fmt.Println(gen.String()) // will print something like: entheu'loaf
 ```
 
 [Here](https://github.com/s0rg/fantasyname/blob/master/_example/main.go) is a full example.
@@ -34,17 +34,17 @@ You can run it with `go run _example/main.go` to see results.
 
 The letters `s`, `v`, `V`, `c`, `B`, `C`, `i`, `m`, `M`, `D`, and `d` represent different types of random replacements:
 
- - s - generic syllable
- - v - vowel
- - V - vowel or vowel combination
- - c - consonant
- - B - consonant or consonant combination suitable for beginning a word
- - C - consonant or consonant combination suitable anywhere in a word
- - i - insult
- - m - mushy name
- - M - mushy name ending
- - D - consonant suited for a stupid person's name
- - d - syllable suited for a stupid person's name (begins with a vowel)
+ - `s` - generic syllable
+ - `v` - vowel
+ - `V` - vowel or vowel combination
+ - `c` - consonant
+ - `B` - consonant or consonant combination suitable for beginning a word
+ - `C` - consonant or consonant combination suitable anywhere in a word
+ - `i` - insult
+ - `m` - mushy name
+ - `M` - mushy name ending
+ - `D` - consonant suited for a stupid person's name
+ - `d` - syllable suited for a stupid person's name (begins with a vowel)
 
 Everything else is emitted literally.
 
@@ -58,5 +58,5 @@ In both types of groupings, a vertical bar `|` denotes a random choice. Empty gr
 For example, `(foo|bar)` emits either `foo` or `bar`. The pattern `<c|v|>` emits a constant, vowel,
 or nothing at all.
 
-An exclamation point `!` means to capitalize the component that follows it. For example, `!(foo)` will
-emit `Foo` and `v!s` will emit a lowercase vowel followed by a capitalized syllable, like `eRod`.
+An exclamation point `!` means to capitalize the component that follows it. For example,
+`!(foo)` will emit `Foo` and `v!s` will emit a lowercase vowel followed by a capitalized syllable, like `eRod`.
