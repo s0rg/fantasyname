@@ -38,10 +38,15 @@ func (s *state) Split() (rv *state) {
 		return s
 	}
 
-	tmp := make([]fmt.Stringer, cutoff)
-	copy(tmp, s.items[s.splitpos:])
+	switch cutoff {
+	case 1:
+		// optimization - do not create sequence for single stringer.
+	default:
+		tmp := make([]fmt.Stringer, cutoff)
+		copy(tmp, s.items[s.splitpos:])
 
-	s.items[s.splitpos] = stringers.Sequence(tmp)
+		s.items[s.splitpos] = stringers.Sequence(tmp)
+	}
 
 	s.splitpos++
 	s.items = s.items[:s.splitpos]
@@ -50,6 +55,11 @@ func (s *state) Split() (rv *state) {
 }
 
 func (s *state) Stringer() (rv fmt.Stringer) {
+	if len(s.items) == 1 {
+		// optimize 1-element sequences.
+		return s.withWrappers(s.items[0])
+	}
+
 	if s.IsGroup {
 		rv = stringers.Random(s.items)
 	} else {
