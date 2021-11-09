@@ -8,6 +8,8 @@ import (
 )
 
 func TestParserErrors(t *testing.T) {
+	t.Parallel()
+
 	var (
 		p = &parser{}
 		e error
