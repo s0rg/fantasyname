@@ -6,7 +6,7 @@
 [![PkgGoDev](https://pkg.go.dev/badge/github.com/s0rg/fantasyname)](https://pkg.go.dev/github.com/s0rg/fantasyname)
 [![License](https://img.shields.io/github/license/s0rg/fantasyname)](https://github.com/s0rg/fantasyname/blob/main/LICENSE)
 [![Go Version](https://img.shields.io/github/go-mod/go-version/s0rg/fantasyname)](go.mod)
-
+[![Tag](https://img.shields.io/github/v/tag/s0rg/fantasyname?sort=semver)](https://github.com/s0rg/fantasyname/tags)
 
 # fantasyname
 
