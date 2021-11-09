@@ -15,17 +15,29 @@ func Collapsed(s fmt.Stringer) fmt.Stringer {
 
 func (clp *collapser) String() string {
 	var (
+		max, cnt  int
 		cur, prev rune
 		rres      = []rune(clp.s.String())
 		rout      = make([]rune, 0, len(rres))
 	)
 
 	for i := 0; i < len(rres); i++ {
-		if cur = rres[i]; cur == prev && needCollapse(cur) {
-			continue
+		if cur = rres[i]; cur == prev {
+			cnt++
+		} else {
+			cnt = 0
 		}
 
-		rout = append(rout, cur)
+		max = 2
+
+		if needCollapse(cur) {
+			max = 1
+		}
+
+		if cnt < max {
+			rout = append(rout, cur)
+		}
+
 		prev = cur
 	}
 
