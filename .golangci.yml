@@ -22,7 +22,6 @@ linters:
     - gofumpt
     - cyclop
     - gomnd
-    - dupl
     - gci
     # deprecated :(
     - interfacer
