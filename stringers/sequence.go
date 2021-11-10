@@ -5,7 +5,7 @@ import (
 	"strings"
 )
 
-// Sequence holds bunch of stringers, and calls every one in order.
+// Sequence holds bunch of stringers, and construct result by calling every one in order.
 type Sequence []fmt.Stringer
 
 func (seq Sequence) String() string {

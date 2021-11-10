@@ -26,7 +26,7 @@ func TestCompileErrors(t *testing.T) {
 	}
 
 	for idx, tc := range cases {
-		_, err := Compile(tc.Pattern)
+		_, err := Compile(tc.Pattern, false)
 		if err == nil {
 			t.Errorf("no error for case: %d", idx)
 		}
@@ -45,14 +45,12 @@ func TestCompileTricky(t *testing.T) {
 		val = "a"
 	)
 
-	gen, err := Compile(pat)
+	gen, err := Compile(pat, false)
 	if err != nil {
 		t.Errorf("uexpected error: %v", err)
 	}
 
-	rv := gen.String()
-
-	if rv != val {
+	if rv := gen.String(); rv != val {
 		t.Errorf("unexpected result: '%s'", rv)
 	}
 }
@@ -66,7 +64,7 @@ func TestCompileMain(t *testing.T) {
 		vals = "oof"
 	)
 
-	gen, err := Compile(pat)
+	gen, err := Compile(pat, false)
 	if err != nil {
 		t.Errorf("uexpected error: %v", err)
 	}
@@ -74,6 +72,24 @@ func TestCompileMain(t *testing.T) {
 	rv := gen.String()
 
 	if !strings.HasPrefix(rv, vals) || !strings.HasSuffix(rv, valp) {
+		t.Errorf("unexpected result: '%s'", rv)
+	}
+}
+
+func TestCompileCollapse(t *testing.T) {
+	t.Parallel()
+
+	const (
+		pat = "(xxooo)"
+		val = "xoo"
+	)
+
+	gen, err := Compile(pat, true)
+	if err != nil {
+		t.Errorf("uexpected error: %v", err)
+	}
+
+	if rv := gen.String(); rv != val {
 		t.Errorf("unexpected result: '%s'", rv)
 	}
 }

@@ -10,7 +10,8 @@
 
 # fantasyname
 
-This is a golang implementation of [name generator described at RinkWorks](http://rinkworks.com/namegen/)
+This is a golang implementation of [name generator described at RinkWorks](http://rinkworks.com/namegen/),
+its based on [https://github.com/skeeto/fantasyname](https://github.com/skeeto/fantasyname) code.
 
 # example
 
@@ -18,7 +19,7 @@ How it looks like:
 ```go
     import "github.com/s0rg/fantasyname"
 
-    gen, err := fantasyname.Compile("sV'i")
+    gen, err := fantasyname.Compile("sV'i", true)
     if err != nil {
         log.Fatal(err)
     }

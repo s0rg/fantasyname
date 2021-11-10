@@ -8,7 +8,7 @@ type collapser struct {
 	s fmt.Stringer
 }
 
-// Collapsed creates wrapper that colapses similar runes in its input.
+// Collapsed creates wrapper that colapses similar runes triples (and some doubles) in its input.
 func Collapsed(s fmt.Stringer) fmt.Stringer {
 	return &collapser{s: s}
 }
