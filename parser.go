@@ -10,9 +10,9 @@ import (
 
 var (
 	// ErrEmptyStack is returned, if parser counts stack as non-empty, but it was.
-	ErrEmptyStack = errors.New("stack is empty")
-	// ErrInvalidSplit is returned when split - '|' is found in pattern out of any group.
-	ErrInvalidSplit = errors.New("out-of-group split")
+	ErrEmptyStack = errors.New("empty stack")
+	// ErrInvalidSplit is returned when split - "|" is found in pattern out of any group.
+	ErrInvalidSplit = errors.New("invalid split")
 	// ErrUnbalancedGroup is returned when stuck upon unexpected group close/open brackets.
 	ErrUnbalancedGroup = errors.New("unbalanced group")
 )
@@ -102,7 +102,7 @@ func (p *parser) OnSymbol(r rune) (err error) {
 	return nil
 }
 
-func (p *parser) Build() (s fmt.Stringer, err error) {
+func (p *parser) Build(collapse bool) (s fmt.Stringer, err error) {
 	if len(p.stack) != 1 {
 		return nil, ErrUnbalancedGroup
 	}
@@ -110,5 +110,11 @@ func (p *parser) Build() (s fmt.Stringer, err error) {
 	// no need to check `ok` - its already checked above.
 	top, _ := p.stack.Top()
 
-	return wrappers.Collapsed(top.Stringer()), nil
+	s = top.Stringer()
+
+	if collapse {
+		s = wrappers.Collapsed(s)
+	}
+
+	return s, nil
 }

@@ -7,12 +7,13 @@ import (
 	"github.com/s0rg/fantasyname/wrappers"
 )
 
-// Compile creates `fmt.Stringer` from given pattern, you can call it as many times as
-// you wish, it will produce new name on every call.
+// Compile creates fmt.Stringer from given pattern, you can call it as many times as
+// you wish, it will produce new name on every call. The "collapse" argument controls
+// triples collapsing in result.
 //
-// Under the hood it uses `math/rand`, to perform random selection, so you need to
+// Under the hood it uses "math/rand", to perform random selection, so you need to
 // initialize it with seed on your own.
-func Compile(pattern string) (rv fmt.Stringer, err error) {
+func Compile(pattern string, collapse bool) (rv fmt.Stringer, err error) {
 	if pattern = strings.TrimSpace(pattern); pattern == "" {
 		return nil, ErrEmptyStack
 	}
@@ -44,5 +45,5 @@ func Compile(pattern string) (rv fmt.Stringer, err error) {
 		}
 	}
 
-	return p.Build()
+	return p.Build(collapse)
 }

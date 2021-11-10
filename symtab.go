@@ -59,13 +59,11 @@ var (
 	}
 
 	vowelsCombo = []string{
-		"ae", "ai", "au", "ay", "ea", "ee", "ei", "eu",
-		"ey", "ia", "ie", "oe", "oi", "oo", "ou", "ui",
+		"ae", "ai", "au", "ay", "ea", "ee", "ei", "eu", "ey", "ia", "ie", "oe", "oi", "oo", "ou", "ui",
 	}
 
 	consonantsBase = []string{
-		"b", "c", "d", "f", "g", "h", "k", "l", "m",
-		"n", "p", "r", "s", "t", "v", "w", "y", "z",
+		"b", "c", "d", "f", "g", "h", "k", "l", "m", "n", "p", "r", "s", "t", "v", "w", "y", "z",
 	}
 
 	consonantsComboBase = []string{
@@ -73,65 +71,60 @@ var (
 	}
 
 	consonantsBegin = []string{
-		"bl", "br", "chr", "cl", "cr", "dr", "qu", "rh", "sch",
-		"sl", "sm", "sn", "str", "sw", "thr", "tr", "wh", "zh",
+		"bl", "br", "chr", "cl", "cr", "dr", "qu", "rh", "sch", "sl", "sm", "sn", "str", "sw", "thr", "tr", "wh", "zh",
 	}
 
 	consonantsAny = []string{
 		"ck", "gh", "ld", "lt", "nd", "nn", "nt", "rd", "rr", "rt", "ss",
 	}
 
-	consX = "x"
-	consJ = "j"
-	consQ = "q"
+	consonantsExtra = []string{
+		"j", "q", "x",
+	}
 
-	consonants = merge(consonantsBase, []string{consJ, consQ, consX})
+	consonants = merge(consonantsBase, consonantsExtra)
 
 	consonantsComboBegin = merge(
-		append(consonantsBase, consJ),
+		append(consonantsBase, consonantsExtra[0]),
 		consonantsComboBase,
 		consonantsBegin,
 	)
 
 	consonantsComboAny = merge(
-		append(consonantsBase, consQ),
+		append(consonantsBase, consonantsExtra[1]),
 		consonantsComboBase,
 		consonantsAny,
 	)
 
 	consonantsStupid = []string{
-		"b", "d", "f", "g", "h", "j", "k", "m", "n", "p", "w", "bl", "br", "cl",
-		"fl", "fr", "gh", "gl", "gr", "kl", "th",
+		"b", "d", "f", "g", "h", "j", "k", "m", "n", "p", "w", "bl", "br", "cl", "fl", "fr", "gh", "gl", "gr", "kl",
+		"th",
 	}
 
 	insults = []string{
-		"air", "ankle", "ball", "beef", "bone", "bum", "bumble", "bump", "cheese",
-		"clod", "clot", "clown", "corn", "dip", "dolt", "doof", "dork", "dumb", "face",
-		"finger", "foot", "fumble", "goof", "grumble", "head", "knock", "knocker",
-		"knuckle", "loaf", "lump", "lunk", "meat", "muck", "munch", "nit", "numb", "pin",
-		"puff", "skull", "snark", "sneeze", "thimble", "twerp", "twit", "wad", "wimp", "wipe",
+		"air", "ankle", "ball", "beef", "bone", "bum", "bumble", "bump", "cheese", "clod", "clot", "clown", "corn",
+		"dip", "dolt", "doof", "dork", "dumb", "face", "finger", "foot", "fumble", "goof", "grumble", "head", "knock",
+		"knocker", "knuckle", "loaf", "lump", "lunk", "meat", "muck", "munch", "nit", "numb", "pin", "puff", "skull",
+		"snark", "sneeze", "thimble", "twerp", "twit", "wad", "wimp", "wipe",
 	}
 
 	mushies = []string{
-		"baby", "booble", "bunker", "cuddle", "cuddly", "cutie", "doodle", "foofie",
-		"gooble", "honey", "kissie", "lover", "lovey", "moofie", "mooglie", "moopie",
-		"moopsie", "nookum", "poochie", "poof", "poofie", "pookie", "schmoopie",
-		"schnoogle", "schnookie", "schnookum", "smooch", "smoochie", "smoosh", "snoogle",
-		"snoogy", "snookie", "snookum", "snuggy", "sweetie", "woogle", "woogy", "wookie",
-		"wookum", "wuddle", "wuddly", "wuggy", "wunny",
+		"baby", "booble", "bunker", "cuddle", "cuddly", "cutie", "doodle", "foofie", "gooble", "honey", "kissie",
+		"lover", "lovey", "moofie", "mooglie", "moopie", "moopsie", "nookum", "poochie", "poof", "poofie", "pookie",
+		"schmoopie", "schnoogle", "schnookie", "schnookum", "smooch", "smoochie", "smoosh", "snoogle", "snoogy",
+		"snookie", "snookum", "snuggy", "sweetie", "woogle", "woogy", "wookie", "wookum", "wuddle", "wuddly", "wuggy",
+		"wunny",
 	}
 
 	mushiesEnds = []string{
-		"boo", "bunch", "bunny", "cake", "cakes", "cute", "darling", "dumpling",
-		"dumplings", "face", "foof", "goo", "head", "kin", "kins", "lips", "love",
-		"mush", "pie", "poo", "pooh", "pook", "pums",
+		"boo", "bunch", "bunny", "cake", "cakes", "cute", "darling", "dumpling", "dumplings", "face", "foof", "goo",
+		"head", "kin", "kins", "lips", "love", "mush", "pie", "poo", "pooh", "pook", "pums",
 	}
 
 	syllablesStupid = []string{
-		"elch", "idiot", "ob", "og", "ok", "olph", "olt", "omph", "ong", "onk", "oo",
-		"oob", "oof", "oog", "ook", "ooz", "org", "ork", "orm", "oron", "ub", "uck",
-		"ug", "ulf", "ult", "um", "umb", "ump", "umph", "un", "unb", "ung", "unk",
-		"unph", "unt", "uzz",
+		"elch", "idiot", "ob", "og", "ok", "olph", "olt", "omph", "ong", "onk", "oo", "oob", "oof", "oog", "ook",
+		"ooz", "org", "ork", "orm", "oron", "ub", "uck", "ug", "ulf", "ult", "um", "umb", "ump", "umph", "un", "unb",
+		"ung", "unk", "unph", "unt", "uzz",
 	}
 
 	symbolMap = map[rune][]fmt.Stringer{
