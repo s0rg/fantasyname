@@ -55,14 +55,12 @@ func (s *state) Split() (rv *state) {
 }
 
 func (s *state) Stringer() (rv fmt.Stringer) {
-	if len(s.items) == 1 {
-		// optimize 1-element sequences.
-		return s.withWrappers(s.items[0])
-	}
-
-	if s.IsGroup {
+	switch {
+	case len(s.items) == 1:
+		rv = s.items[0]
+	case s.IsGroup:
 		rv = stringers.Random(s.items)
-	} else {
+	default:
 		rv = stringers.Sequence(s.items)
 	}
 

@@ -3,171 +3,168 @@ package fantasyname
 import (
 	"fmt"
 
-	st "github.com/s0rg/fantasyname/stringers"
+	"github.com/s0rg/fantasyname/stringers"
 )
 
 var (
-	syllables = []fmt.Stringer{
+	syllables = []string{
 		// a
-		st.Literal("ach"), st.Literal("ack"), st.Literal("ad"), st.Literal("age"), st.Literal("ald"),
-		st.Literal("ale"), st.Literal("an"), st.Literal("ang"), st.Literal("ar"), st.Literal("ard"),
-		st.Literal("as"), st.Literal("ash"), st.Literal("at"), st.Literal("ath"), st.Literal("augh"),
-		st.Literal("aw"),
+		"ach", "ack", "ad", "age", "ald", "ale", "an", "ang", "ar", "ard", "as", "ash", "at", "ath", "augh", "aw",
 		// b
-		st.Literal("ban"), st.Literal("bel"), st.Literal("bur"),
+		"ban", "bel", "bur",
 		// c
-		st.Literal("cer"), st.Literal("cha"), st.Literal("che"),
+		"cer", "cha", "che",
 		// d
-		st.Literal("dan"), st.Literal("dar"), st.Literal("del"), st.Literal("den"), st.Literal("dra"),
-		st.Literal("dyn"),
+		"dan", "dar", "del", "den", "dra", "dyn",
 		// e
-		st.Literal("ech"), st.Literal("eld"), st.Literal("elm"), st.Literal("em"), st.Literal("en"),
-		st.Literal("end"), st.Literal("eng"), st.Literal("enth"), st.Literal("er"), st.Literal("ess"),
-		st.Literal("est"), st.Literal("et"),
+		"ech", "eld", "elm", "em", "en", "end", "eng", "enth", "er", "ess", "est", "et",
 		// g
-		st.Literal("gar"), st.Literal("gha"),
+		"gar", "gha",
 		// h
-		st.Literal("hat"), st.Literal("hin"), st.Literal("hon"),
+		"hat", "hin", "hon",
 		// i
-		st.Literal("ia"), st.Literal("ight"), st.Literal("ild"), st.Literal("im"), st.Literal("ina"),
-		st.Literal("ine"), st.Literal("ing"), st.Literal("ir"), st.Literal("is"), st.Literal("iss"),
-		st.Literal("it"),
+		"ia", "ight", "ild", "im", "ina", "ine", "ing", "ir", "is", "iss", "it",
 		// k
-		st.Literal("kal"), st.Literal("kel"), st.Literal("kim"), st.Literal("kin"),
+		"kal", "kel", "kim", "kin",
 		// l
-		st.Literal("ler"), st.Literal("lor"), st.Literal("lye"),
+		"ler", "lor", "lye",
 		// m
-		st.Literal("mor"), st.Literal("mos"),
+		"mor", "mos",
 		// n
-		st.Literal("nal"), st.Literal("ny"), st.Literal("nys"),
+		"nal", "ny", "nys",
 		// o
-		st.Literal("old"), st.Literal("om"), st.Literal("on"), st.Literal("or"), st.Literal("orm"),
-		st.Literal("os"), st.Literal("ough"),
+		"old", "om", "on", "or", "orm", "os", "ough",
 		// p
-		st.Literal("per"), st.Literal("pol"),
+		"per", "pol",
 		// q
-		st.Literal("qua"), st.Literal("que"),
+		"qua", "que",
 		// r
-		st.Literal("rad"), st.Literal("rak"), st.Literal("ran"), st.Literal("ray"), st.Literal("ril"),
-		st.Literal("ris"), st.Literal("rod"), st.Literal("roth"), st.Literal("ryn"),
+		"rad", "rak", "ran", "ray", "ril", "ris", "rod", "roth", "ryn",
 		// s
-		st.Literal("sam"), st.Literal("say"), st.Literal("ser"), st.Literal("shy"), st.Literal("skel"),
-		st.Literal("sul"),
+		"sam", "say", "ser", "shy", "skel", "sul",
 		// t
-		st.Literal("tai"), st.Literal("tan"), st.Literal("tas"), st.Literal("ther"), st.Literal("tia"),
-		st.Literal("tin"), st.Literal("ton"), st.Literal("tor"), st.Literal("tur"),
+		"tai", "tan", "tas", "ther", "tia", "tin", "ton", "tor", "tur",
 		// u
-		st.Literal("um"), st.Literal("und"), st.Literal("unt"), st.Literal("urn"), st.Literal("usk"),
-		st.Literal("ust"),
+		"um", "und", "unt", "urn", "usk", "ust",
 		// v
-		st.Literal("ver"), st.Literal("ves"), st.Literal("vor"),
+		"ver", "ves", "vor",
 		// w
-		st.Literal("war"), st.Literal("wor"),
+		"war", "wor",
 		// y
-		st.Literal("yer"),
+		"yer",
 	}
 
-	vowels = []fmt.Stringer{
-		st.Literal("a"), st.Literal("e"), st.Literal("i"), st.Literal("o"), st.Literal("u"), st.Literal("y"),
+	vowels = []string{
+		"a", "e", "i", "o", "u", "y",
 	}
 
-	vowelsCombo = []fmt.Stringer{
-		st.Literal("a"), st.Literal("e"), st.Literal("i"), st.Literal("o"), st.Literal("u"),
-		st.Literal("y"), st.Literal("ae"), st.Literal("ai"), st.Literal("au"), st.Literal("ay"),
-		st.Literal("ea"), st.Literal("ee"), st.Literal("ei"), st.Literal("eu"), st.Literal("ey"),
-		st.Literal("ia"), st.Literal("ie"), st.Literal("oe"), st.Literal("oi"), st.Literal("oo"),
-		st.Literal("ou"), st.Literal("ui"),
+	vowelsCombo = []string{
+		"ae", "ai", "au", "ay", "ea", "ee", "ei", "eu",
+		"ey", "ia", "ie", "oe", "oi", "oo", "ou", "ui",
 	}
 
-	consonants = []fmt.Stringer{
-		st.Literal("b"), st.Literal("c"), st.Literal("d"), st.Literal("f"), st.Literal("g"), st.Literal("h"),
-		st.Literal("j"), st.Literal("k"), st.Literal("l"), st.Literal("m"), st.Literal("n"), st.Literal("p"),
-		st.Literal("q"), st.Literal("r"), st.Literal("s"), st.Literal("t"), st.Literal("v"), st.Literal("w"),
-		st.Literal("x"), st.Literal("y"), st.Literal("z"),
+	consonantsBase = []string{
+		"b", "c", "d", "f", "g", "h", "k", "l", "m",
+		"n", "p", "r", "s", "t", "v", "w", "y", "z",
 	}
 
-	consonantsComboBegin = []fmt.Stringer{
-		st.Literal("b"), st.Literal("bl"), st.Literal("br"), st.Literal("c"), st.Literal("ch"), st.Literal("chr"),
-		st.Literal("cl"), st.Literal("cr"), st.Literal("d"), st.Literal("dr"), st.Literal("f"), st.Literal("g"),
-		st.Literal("h"), st.Literal("j"), st.Literal("k"), st.Literal("l"), st.Literal("ll"), st.Literal("m"),
-		st.Literal("n"), st.Literal("p"), st.Literal("ph"), st.Literal("qu"), st.Literal("r"), st.Literal("rh"),
-		st.Literal("s"), st.Literal("sch"), st.Literal("sh"), st.Literal("sl"), st.Literal("sm"), st.Literal("sn"),
-		st.Literal("st"), st.Literal("str"), st.Literal("sw"), st.Literal("t"), st.Literal("th"), st.Literal("thr"),
-		st.Literal("tr"), st.Literal("v"), st.Literal("w"), st.Literal("wh"), st.Literal("y"), st.Literal("z"),
-		st.Literal("zh"),
+	consonantsComboBase = []string{
+		"ch", "ll", "ph", "sh", "st", "th",
 	}
 
-	consonantsComboAny = []fmt.Stringer{
-		st.Literal("b"), st.Literal("c"), st.Literal("ch"), st.Literal("ck"), st.Literal("d"), st.Literal("f"),
-		st.Literal("g"), st.Literal("gh"), st.Literal("h"), st.Literal("k"), st.Literal("l"), st.Literal("ld"),
-		st.Literal("ll"), st.Literal("lt"), st.Literal("m"), st.Literal("n"), st.Literal("nd"), st.Literal("nn"),
-		st.Literal("nt"), st.Literal("p"), st.Literal("ph"), st.Literal("q"), st.Literal("r"), st.Literal("rd"),
-		st.Literal("rr"), st.Literal("rt"), st.Literal("s"), st.Literal("sh"), st.Literal("ss"), st.Literal("st"),
-		st.Literal("t"), st.Literal("th"), st.Literal("v"), st.Literal("w"), st.Literal("y"), st.Literal("z"),
+	consonantsBegin = []string{
+		"bl", "br", "chr", "cl", "cr", "dr", "qu", "rh", "sch",
+		"sl", "sm", "sn", "str", "sw", "thr", "tr", "wh", "zh",
 	}
 
-	insults = []fmt.Stringer{
-		st.Literal("air"), st.Literal("ankle"), st.Literal("ball"), st.Literal("beef"), st.Literal("bone"),
-		st.Literal("bum"), st.Literal("bumble"), st.Literal("bump"), st.Literal("cheese"), st.Literal("clod"),
-		st.Literal("clot"), st.Literal("clown"), st.Literal("corn"), st.Literal("dip"), st.Literal("dolt"),
-		st.Literal("doof"), st.Literal("dork"), st.Literal("dumb"), st.Literal("face"), st.Literal("finger"),
-		st.Literal("foot"), st.Literal("fumble"), st.Literal("goof"), st.Literal("grumble"), st.Literal("head"),
-		st.Literal("knock"), st.Literal("knocker"), st.Literal("knuckle"), st.Literal("loaf"), st.Literal("lump"),
-		st.Literal("lunk"), st.Literal("meat"), st.Literal("muck"), st.Literal("munch"), st.Literal("nit"),
-		st.Literal("numb"), st.Literal("pin"), st.Literal("puff"), st.Literal("skull"), st.Literal("snark"),
-		st.Literal("sneeze"), st.Literal("thimble"), st.Literal("twerp"), st.Literal("twit"), st.Literal("wad"),
-		st.Literal("wimp"), st.Literal("wipe"),
+	consonantsAny = []string{
+		"ck", "gh", "ld", "lt", "nd", "nn", "nt", "rd", "rr", "rt", "ss",
 	}
 
-	mushies = []fmt.Stringer{
-		st.Literal("baby"), st.Literal("booble"), st.Literal("bunker"), st.Literal("cuddle"), st.Literal("cuddly"),
-		st.Literal("cutie"), st.Literal("doodle"), st.Literal("foofie"), st.Literal("gooble"), st.Literal("honey"),
-		st.Literal("kissie"), st.Literal("lover"), st.Literal("lovey"), st.Literal("moofie"), st.Literal("mooglie"),
-		st.Literal("moopie"), st.Literal("moopsie"), st.Literal("nookum"), st.Literal("poochie"), st.Literal("poof"),
-		st.Literal("poofie"), st.Literal("pookie"), st.Literal("schmoopie"), st.Literal("schnoogle"),
-		st.Literal("schnookie"), st.Literal("schnookum"), st.Literal("smooch"), st.Literal("smoochie"),
-		st.Literal("smoosh"), st.Literal("snoogle"), st.Literal("snoogy"), st.Literal("snookie"), st.Literal("snookum"),
-		st.Literal("snuggy"), st.Literal("sweetie"), st.Literal("woogle"), st.Literal("woogy"), st.Literal("wookie"),
-		st.Literal("wookum"), st.Literal("wuddle"), st.Literal("wuddly"), st.Literal("wuggy"), st.Literal("wunny"),
+	consX = "x"
+	consJ = "j"
+	consQ = "q"
+
+	consonants = merge(consonantsBase, []string{consJ, consQ, consX})
+
+	consonantsComboBegin = merge(
+		append(consonantsBase, consJ),
+		consonantsComboBase,
+		consonantsBegin,
+	)
+
+	consonantsComboAny = merge(
+		append(consonantsBase, consQ),
+		consonantsComboBase,
+		consonantsAny,
+	)
+
+	consonantsStupid = []string{
+		"b", "d", "f", "g", "h", "j", "k", "m", "n", "p", "w", "bl", "br", "cl",
+		"fl", "fr", "gh", "gl", "gr", "kl", "th",
 	}
 
-	mushiesEnds = []fmt.Stringer{
-		st.Literal("boo"), st.Literal("bunch"), st.Literal("bunny"), st.Literal("cake"), st.Literal("cakes"),
-		st.Literal("cute"), st.Literal("darling"), st.Literal("dumpling"), st.Literal("dumplings"), st.Literal("face"),
-		st.Literal("foof"), st.Literal("goo"), st.Literal("head"), st.Literal("kin"), st.Literal("kins"),
-		st.Literal("lips"), st.Literal("love"), st.Literal("mush"), st.Literal("pie"), st.Literal("poo"),
-		st.Literal("pooh"), st.Literal("pook"), st.Literal("pums"),
+	insults = []string{
+		"air", "ankle", "ball", "beef", "bone", "bum", "bumble", "bump", "cheese",
+		"clod", "clot", "clown", "corn", "dip", "dolt", "doof", "dork", "dumb", "face",
+		"finger", "foot", "fumble", "goof", "grumble", "head", "knock", "knocker",
+		"knuckle", "loaf", "lump", "lunk", "meat", "muck", "munch", "nit", "numb", "pin",
+		"puff", "skull", "snark", "sneeze", "thimble", "twerp", "twit", "wad", "wimp", "wipe",
 	}
 
-	consonantsStupid = []fmt.Stringer{
-		st.Literal("b"), st.Literal("bl"), st.Literal("br"), st.Literal("cl"), st.Literal("d"), st.Literal("f"),
-		st.Literal("fl"), st.Literal("fr"), st.Literal("g"), st.Literal("gh"), st.Literal("gl"), st.Literal("gr"),
-		st.Literal("h"), st.Literal("j"), st.Literal("k"), st.Literal("kl"), st.Literal("m"), st.Literal("n"),
-		st.Literal("p"), st.Literal("th"), st.Literal("w"),
+	mushies = []string{
+		"baby", "booble", "bunker", "cuddle", "cuddly", "cutie", "doodle", "foofie",
+		"gooble", "honey", "kissie", "lover", "lovey", "moofie", "mooglie", "moopie",
+		"moopsie", "nookum", "poochie", "poof", "poofie", "pookie", "schmoopie",
+		"schnoogle", "schnookie", "schnookum", "smooch", "smoochie", "smoosh", "snoogle",
+		"snoogy", "snookie", "snookum", "snuggy", "sweetie", "woogle", "woogy", "wookie",
+		"wookum", "wuddle", "wuddly", "wuggy", "wunny",
 	}
 
-	syllablesStupid = []fmt.Stringer{
-		st.Literal("elch"), st.Literal("idiot"), st.Literal("ob"), st.Literal("og"), st.Literal("ok"),
-		st.Literal("olph"), st.Literal("olt"), st.Literal("omph"), st.Literal("ong"), st.Literal("onk"),
-		st.Literal("oo"), st.Literal("oob"), st.Literal("oof"), st.Literal("oog"), st.Literal("ook"),
-		st.Literal("ooz"), st.Literal("org"), st.Literal("ork"), st.Literal("orm"), st.Literal("oron"),
-		st.Literal("ub"), st.Literal("uck"), st.Literal("ug"), st.Literal("ulf"), st.Literal("ult"),
-		st.Literal("um"), st.Literal("umb"), st.Literal("ump"), st.Literal("umph"), st.Literal("un"),
-		st.Literal("unb"), st.Literal("ung"), st.Literal("unk"), st.Literal("unph"), st.Literal("unt"),
-		st.Literal("uzz"),
+	mushiesEnds = []string{
+		"boo", "bunch", "bunny", "cake", "cakes", "cute", "darling", "dumpling",
+		"dumplings", "face", "foof", "goo", "head", "kin", "kins", "lips", "love",
+		"mush", "pie", "poo", "pooh", "pook", "pums",
+	}
+
+	syllablesStupid = []string{
+		"elch", "idiot", "ob", "og", "ok", "olph", "olt", "omph", "ong", "onk", "oo",
+		"oob", "oof", "oog", "ook", "ooz", "org", "ork", "orm", "oron", "ub", "uck",
+		"ug", "ulf", "ult", "um", "umb", "ump", "umph", "un", "unb", "ung", "unk",
+		"unph", "unt", "uzz",
 	}
 
 	symbolMap = map[rune][]fmt.Stringer{
-		's': syllables,
-		'v': vowels,
-		'V': vowelsCombo,
-		'c': consonants,
-		'B': consonantsComboBegin,
-		'C': consonantsComboAny,
-		'i': insults,
-		'm': mushies,
-		'M': mushiesEnds,
-		'D': consonantsStupid,
-		'd': syllablesStupid,
+		's': convert(syllables),
+		'v': convert(vowels),
+		'V': convert(merge(vowels, vowelsCombo)),
+		'c': convert(consonants),
+		'B': convert(consonantsComboBegin),
+		'C': convert(consonantsComboAny),
+		'i': convert(insults),
+		'm': convert(mushies),
+		'M': convert(mushiesEnds),
+		'D': convert(consonantsStupid),
+		'd': convert(syllablesStupid),
 	}
 )
+
+func convert(in []string) (rv []fmt.Stringer) {
+	rv = make([]fmt.Stringer, len(in))
+
+	for i, s := range in {
+		rv[i] = stringers.Literal(s)
+	}
+
+	return rv
+}
+
+func merge(a []string, b ...[]string) (rv []string) {
+	rv = a
+
+	for _, v := range b {
+		rv = append(rv, v...)
+	}
+
+	return rv
+}

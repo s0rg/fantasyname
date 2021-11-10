@@ -97,6 +97,7 @@ var templates = []template{
 	{Name: "Fantasy (J, G, Z, etc.)", Tmpl: FANTASY_J_G_Z},
 	{Name: "Fantasy (K, J, Y, etc.)", Tmpl: FANTASY_K_J_Y},
 	{Name: "Fantasy (S, E, etc.)", Tmpl: FANTASY_S_E},
+	{Name: "Funny", Tmpl: "sdD i-i"},
 }
 
 func main() {
