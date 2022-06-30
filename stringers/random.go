@@ -2,12 +2,20 @@ package stringers
 
 import (
 	"fmt"
-	"math/rand"
 )
 
 // Random holds bunch of stringers, and choose among them on every call.
-type Random []fmt.Stringer
+type Random struct {
+	items []fmt.Stringer
+	rndfn func(int) int
+}
 
-func (rnd Random) String() string {
-	return rnd[rand.Intn(len(rnd))].String()
+// MakeRandom create new Random stringer from list of stringers and random func.
+func MakeRandom(items []fmt.Stringer, rndfn func(int) int) *Random {
+	return &Random{items: items, rndfn: rndfn}
+}
+
+// String implements stringer for Random.
+func (rnd *Random) String() string {
+	return rnd.items[rnd.rndfn(len(rnd.items))].String()
 }

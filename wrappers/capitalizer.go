@@ -2,8 +2,12 @@ package wrappers
 
 import (
 	"fmt"
-	"strings"
+
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
+
+var caser = cases.Title(language.English)
 
 type capitalizer struct {
 	s fmt.Stringer
@@ -15,5 +19,5 @@ func Capitalized(s fmt.Stringer) fmt.Stringer {
 }
 
 func (cpt *capitalizer) String() string {
-	return strings.Title(cpt.s.String())
+	return caser.String(cpt.s.String())
 }

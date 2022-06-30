@@ -2,6 +2,7 @@ package fantasyname
 
 import (
 	"errors"
+	"math/rand"
 	"strings"
 	"testing"
 )
@@ -26,7 +27,7 @@ func TestCompileErrors(t *testing.T) {
 	}
 
 	for idx, tc := range cases {
-		_, err := Compile(tc.Pattern, false)
+		_, err := Compile(tc.Pattern)
 		if err == nil {
 			t.Errorf("no error for case: %d", idx)
 		}
@@ -45,7 +46,7 @@ func TestCompileTricky(t *testing.T) {
 		val = "a"
 	)
 
-	gen, err := Compile(pat, false)
+	gen, err := Compile(pat)
 	if err != nil {
 		t.Errorf("uexpected error: %v", err)
 	}
@@ -64,7 +65,7 @@ func TestCompileMain(t *testing.T) {
 		vals = "oof"
 	)
 
-	gen, err := Compile(pat, false)
+	gen, err := Compile(pat, RandFn(rand.Intn))
 	if err != nil {
 		t.Errorf("uexpected error: %v", err)
 	}
@@ -84,7 +85,7 @@ func TestCompileCollapse(t *testing.T) {
 		val = "xoo"
 	)
 
-	gen, err := Compile(pat, true)
+	gen, err := Compile(pat, Collapse(true))
 	if err != nil {
 		t.Errorf("uexpected error: %v", err)
 	}

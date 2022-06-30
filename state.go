@@ -11,6 +11,7 @@ type wrapper func(fmt.Stringer) fmt.Stringer
 type state struct {
 	items     []fmt.Stringer
 	wrappers  []wrapper
+	rndfn     func(int) int
 	splitpos  int
 	IsLiteral bool
 	IsGroup   bool
@@ -59,7 +60,7 @@ func (s *state) Stringer() (rv fmt.Stringer) {
 	case len(s.items) == 1:
 		rv = s.items[0]
 	case s.IsGroup:
-		rv = stringers.Random(s.items)
+		rv = stringers.MakeRandom(s.items, s.rndfn)
 	default:
 		rv = stringers.Sequence(s.items)
 	}

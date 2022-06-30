@@ -8,17 +8,13 @@ import (
 )
 
 // Compile creates fmt.Stringer from given pattern, you can call it as many times as
-// you wish, it will produce new name on every call. The "collapse" argument controls
-// triples collapsing in result.
-//
-// Under the hood it uses "math/rand", to perform random selection, so you need to
-// initialize it with seed on your own.
-func Compile(pattern string, collapse bool) (rv fmt.Stringer, err error) {
+// you wish, it will produce new name on every call.
+func Compile(pattern string, opts ...Option) (rv fmt.Stringer, err error) {
 	if pattern = strings.TrimSpace(pattern); pattern == "" {
 		return nil, ErrEmptyStack
 	}
 
-	p := newParser()
+	p := newParser(opts...)
 
 	for pos, r := range pattern {
 		switch r {
@@ -45,5 +41,5 @@ func Compile(pattern string, collapse bool) (rv fmt.Stringer, err error) {
 		}
 	}
 
-	return p.Build(collapse)
+	return p.Build()
 }
