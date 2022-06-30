@@ -1,15 +1,18 @@
 package stringers
 
-import "testing"
+import (
+	"fmt"
+	"math/rand"
+	"testing"
+)
 
 func TestRandom(t *testing.T) {
 	t.Parallel()
 
-	val := Random{
-		Literal("a"),
-		Literal("b"),
-		Literal("c"),
-	}
+	val := MakeRandom(
+		[]fmt.Stringer{Literal("a"), Literal("b"), Literal("c")},
+		rand.Intn,
+	)
 
 	var hit, miss int
 

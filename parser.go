@@ -18,19 +18,28 @@ var (
 )
 
 type parser struct {
+	conf  *config
 	stack statestack
 }
 
-func newParser() (p *parser) {
-	p = &parser{}
+func newParser(opts ...Option) (p *parser) {
+	c := &config{}
 
-	p.stack.Push(state{}) // "root" state
+	for _, o := range opts {
+		o(c)
+	}
+
+	c.validate()
+
+	p = &parser{conf: c}
+
+	p.stack.Push(state{rndfn: p.conf.RandIntN}) // "root" state
 
 	return p
 }
 
 func (p *parser) OnGroupStart(isLiteral bool) {
-	p.stack.Push(state{IsGroup: true, IsLiteral: isLiteral})
+	p.stack.Push(state{IsGroup: true, IsLiteral: isLiteral, rndfn: p.conf.RandIntN})
 }
 
 func (p *parser) OnGroupEnd(isLiteral bool) (err error) {
@@ -89,7 +98,7 @@ func (p *parser) OnSymbol(r rune) (err error) {
 
 	if !top.IsLiteral {
 		if sym, ok := symbolMap[r]; ok {
-			v = stringers.Random(sym)
+			v = stringers.MakeRandom(sym, p.conf.RandIntN)
 		}
 	}
 
@@ -102,7 +111,7 @@ func (p *parser) OnSymbol(r rune) (err error) {
 	return nil
 }
 
-func (p *parser) Build(collapse bool) (s fmt.Stringer, err error) {
+func (p *parser) Build() (s fmt.Stringer, err error) {
 	if len(p.stack) != 1 {
 		return nil, ErrUnbalancedGroup
 	}
@@ -112,7 +121,7 @@ func (p *parser) Build(collapse bool) (s fmt.Stringer, err error) {
 
 	s = top.Stringer()
 
-	if collapse {
+	if p.conf.Collapse {
 		s = wrappers.Collapsed(s)
 	}
 

@@ -17,9 +17,18 @@ its based on [https://github.com/skeeto/fantasyname](https://github.com/skeeto/f
 
 How it looks like:
 ```go
-    import "github.com/s0rg/fantasyname"
+    import (
+        "fmt"
+        "log"
+        "time"
+        "math/rand"
 
-    gen, err := fantasyname.Compile("sV'i", true)
+        fn "github.com/s0rg/fantasyname"
+    )
+
+    rand.Seed(time.Now().UnixNano())
+
+    gen, err := fn.Compile("sV'i", fn.Collapse(true), fn.RandFn(rand.Intn))
     if err != nil {
         log.Fatal(err)
     }
