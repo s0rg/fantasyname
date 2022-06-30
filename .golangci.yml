@@ -11,6 +11,8 @@ linters-settings:
 linters:
   enable-all: true
   disable:
+    - nonamedreturns
+    - exhaustruct
     - exhaustivestruct
     - gochecknoglobals
     - testpackage
@@ -23,11 +25,6 @@ linters:
     - cyclop
     - gomnd
     - gci
-    # deprecated :(
-    - interfacer
-    - scopelint
-    - maligned
-    - golint
   fast: false
 
 output:
