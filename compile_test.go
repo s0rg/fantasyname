@@ -94,3 +94,13 @@ func TestCompileCollapse(t *testing.T) {
 		t.Errorf("unexpected result: '%s'", rv)
 	}
 }
+
+func FuzzCompile(f *testing.F) {
+	f.Add("<i|s>v(mon|chu|zard|rtle)")
+	f.Fuzz(func(t *testing.T, arg string) {
+		_, err := Compile(arg)
+		if err != nil {
+			t.Skip("only correct templates are intresting")
+		}
+	})
+}

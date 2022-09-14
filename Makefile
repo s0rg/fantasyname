@@ -1,6 +1,6 @@
 COP=test.coverage
 
-.PHONY: vet lint test test-cover clean
+.PHONY: vet lint test test-cover fuzz clean
 
 vet:
 	@- go vet ./...
@@ -13,6 +13,9 @@ test: vet
 
 test-cover: test
 	@- go tool cover -func="$(COP)"
+
+fuzz:
+	@- go test -fuzz=Fuzz -fuzztime 1m
 
 clean:
 	@- rm -f "$(COP)"
