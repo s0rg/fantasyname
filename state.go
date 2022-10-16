@@ -9,9 +9,9 @@ import (
 type wrapper func(fmt.Stringer) fmt.Stringer
 
 type state struct {
+	rndfn     func(int) int
 	items     []fmt.Stringer
 	wrappers  []wrapper
-	rndfn     func(int) int
 	splitpos  int
 	IsLiteral bool
 	IsGroup   bool

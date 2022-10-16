@@ -6,8 +6,8 @@ import (
 
 // Random holds bunch of stringers, and choose among them on every call.
 type Random struct {
-	items []fmt.Stringer
 	rndfn func(int) int
+	items []fmt.Stringer
 }
 
 // MakeRandom create new Random stringer from list of stringers and random func.

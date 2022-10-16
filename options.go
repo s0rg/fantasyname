@@ -3,8 +3,8 @@ package fantasyname
 import "math/rand"
 
 type config struct {
-	Collapse bool
 	RandIntN func(int) int
+	Collapse bool
 }
 
 func (c *config) validate() {

@@ -7,8 +7,6 @@ import (
 	"golang.org/x/text/language"
 )
 
-var caser = cases.Title(language.English)
-
 type capitalizer struct {
 	s fmt.Stringer
 }
@@ -19,5 +17,5 @@ func Capitalized(s fmt.Stringer) fmt.Stringer {
 }
 
 func (cpt *capitalizer) String() string {
-	return caser.String(cpt.s.String())
+	return cases.Title(language.English).String(cpt.s.String())
 }
