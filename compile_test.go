@@ -11,8 +11,8 @@ func TestCompileErrors(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
-		Pattern string
 		Err     error
+		Pattern string
 	}
 
 	cases := []testCase{
@@ -70,9 +70,7 @@ func TestCompileMain(t *testing.T) {
 		t.Errorf("uexpected error: %v", err)
 	}
 
-	rv := gen.String()
-
-	if !strings.HasPrefix(rv, vals) || !strings.HasSuffix(rv, valp) {
+	if rv := gen.String(); !strings.HasPrefix(rv, vals) || !strings.HasSuffix(rv, valp) {
 		t.Errorf("unexpected result: '%s'", rv)
 	}
 }
