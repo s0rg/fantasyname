@@ -13,11 +13,11 @@ func Reversed(s fmt.Stringer) fmt.Stringer {
 	return &reverser{s: s}
 }
 
-func (rev *reverser) String() string {
-	return reverse(rev.s.String())
+func (rv *reverser) String() string {
+	return reverse(rv.s.String())
 }
 
-func reverse(s string) string {
+func reverse(s string) (rv string) {
 	rns := []rune(s)
 	for i, j := 0, len(rns)-1; i < j; i, j = i+1, j-1 {
 		rns[i], rns[j] = rns[j], rns[i]

@@ -8,12 +8,12 @@ import (
 // Sequence holds bunch of stringers, and construct result by calling every one in order.
 type Sequence []fmt.Stringer
 
-func (seq Sequence) String() string {
-	var sb strings.Builder
+func (s Sequence) String() string {
+	var b strings.Builder
 
-	for i := 0; i < len(seq); i++ {
-		sb.WriteString(seq[i].String())
+	for i := 0; i < len(s); i++ {
+		b.WriteString(s[i].String())
 	}
 
-	return sb.String()
+	return b.String()
 }
