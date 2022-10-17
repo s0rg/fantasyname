@@ -16,6 +16,6 @@ func Capitalized(s fmt.Stringer) fmt.Stringer {
 	return &capitalizer{s: s}
 }
 
-func (cpt *capitalizer) String() string {
-	return cases.Title(language.English).String(cpt.s.String())
+func (cp *capitalizer) String() string {
+	return cases.Title(language.English).String(cp.s.String())
 }

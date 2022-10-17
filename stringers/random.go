@@ -11,11 +11,11 @@ type Random struct {
 }
 
 // MakeRandom create new Random stringer from list of stringers and random func.
-func MakeRandom(items []fmt.Stringer, rndfn func(int) int) *Random {
+func MakeRandom(items []fmt.Stringer, rndfn func(int) int) fmt.Stringer {
 	return &Random{items: items, rndfn: rndfn}
 }
 
 // String implements stringer for Random.
-func (rnd *Random) String() string {
-	return rnd.items[rnd.rndfn(len(rnd.items))].String()
+func (r *Random) String() string {
+	return r.items[r.rndfn(len(r.items))].String()
 }

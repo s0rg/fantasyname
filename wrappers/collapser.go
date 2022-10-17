@@ -13,11 +13,11 @@ func Collapsed(s fmt.Stringer) fmt.Stringer {
 	return &collapser{s: s}
 }
 
-func (clp *collapser) String() string {
+func (cl *collapser) String() string {
 	var (
 		max, cnt  int
 		cur, prev rune
-		rres      = []rune(clp.s.String())
+		rres      = []rune(cl.s.String())
 		rout      = make([]rune, 0, len(rres))
 	)
 
