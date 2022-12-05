@@ -1,4 +1,4 @@
-COP=test.coverage
+COP=cover.out
 
 .PHONY: vet lint test test-cover fuzz clean
 
