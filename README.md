@@ -19,15 +19,16 @@ its based on [https://github.com/skeeto/fantasyname](https://github.com/skeeto/f
 
 How it looks like:
 ```go
-    import (
-        "fmt"
-        "log"
-        "time"
-        "math/rand"
+import (
+    "fmt"
+    "log"
+    "time"
+    "math/rand"
 
-        fn "github.com/s0rg/fantasyname"
-    )
+    fn "github.com/s0rg/fantasyname"
+)
 
+func main() {
     rand.Seed(time.Now().UnixNano())
 
     gen, err := fn.Compile("sV'i", fn.Collapse(true), fn.RandFn(rand.Intn))
@@ -36,6 +37,7 @@ How it looks like:
     }
 
     fmt.Println(gen.String()) // will print something like: entheu'loaf
+}
 ```
 
 [Here](https://github.com/s0rg/fantasyname/blob/master/_example/main.go) is a full example.
