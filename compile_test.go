@@ -93,6 +93,30 @@ func TestCompileCollapse(t *testing.T) {
 	}
 }
 
+func TestCompileDictionary(t *testing.T) {
+	t.Parallel()
+
+	const (
+		pat = "!a!b!c"
+		val = "AaaBbbCcc"
+	)
+
+	custom := map[rune][]string{
+		'a': {"aaa"},
+		'b': {"bbb"},
+		'c': {"ccc"},
+	}
+
+	gen, err := Compile(pat, Dictionary(custom))
+	if err != nil {
+		t.Errorf("unexpected error: %v", err)
+	}
+
+	if rv := gen.String(); rv != val {
+		t.Errorf("unexpected result: '%s'", rv)
+	}
+}
+
 func FuzzCompile(f *testing.F) {
 	f.Add("<i|s>v(mon|chu|zard|rtle)")
 	f.Fuzz(func(t *testing.T, arg string) {
