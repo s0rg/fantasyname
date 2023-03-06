@@ -1,15 +1,23 @@
 package fantasyname
 
-import "math/rand"
+import (
+	"fmt"
+	"math/rand"
+)
 
 type config struct {
-	RandIntN func(int) int
-	Collapse bool
+	RandIntN   func(int) int
+	Collapse   bool
+	Dictionary map[rune][]fmt.Stringer
 }
 
 func (c *config) validate() {
 	if c.RandIntN == nil {
 		c.RandIntN = rand.Intn
+	}
+
+	if c.Dictionary == nil {
+		c.Dictionary = symbolMap
 	}
 }
 
@@ -27,5 +35,18 @@ func Collapse(v bool) Option {
 func RandFn(v func(int) int) Option {
 	return func(c *config) {
 		c.RandIntN = v
+	}
+}
+
+// Dictionary sets custom dictionary (that maps runes to possible strings) for generation.
+func Dictionary(d map[rune][]string) Option {
+	return func(c *config) {
+		t := make(map[rune][]fmt.Stringer)
+
+		for k, v := range d {
+			t[k] = convert(v)
+		}
+
+		c.Dictionary = t
 	}
 }

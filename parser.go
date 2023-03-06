@@ -97,7 +97,7 @@ func (p *parser) OnSymbol(r rune) (err error) {
 	var v fmt.Stringer
 
 	if !top.IsLiteral {
-		if sym, ok := symbolMap[r]; ok {
+		if sym, ok := p.conf.Dictionary[r]; ok {
 			v = stringers.MakeRandom(sym, p.conf.RandIntN)
 		}
 	}
