@@ -7,8 +7,8 @@ import (
 
 type config struct {
 	RandIntN   func(int) int
-	Collapse   bool
 	Dictionary map[rune][]fmt.Stringer
+	Collapse   bool
 }
 
 func (c *config) validate() {
