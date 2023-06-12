@@ -17,6 +17,7 @@ linters:
     - exhaustruct
     - testpackage
     - varnamelen
+    - depguard
     - ireturn
     - gofumpt
 
