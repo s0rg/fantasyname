@@ -1,12 +1,12 @@
 package fantasyname
 
-type statestack []state
+type statestack []*state
 
-func (ss *statestack) Push(s state) {
+func (ss *statestack) Push(s *state) {
 	*ss = append(*ss, s)
 }
 
-func (ss *statestack) Pop() (rv state, ok bool) {
+func (ss *statestack) Pop() (rv *state, ok bool) {
 	sp := *ss
 
 	if n := len(sp); n > 0 {
@@ -21,7 +21,7 @@ func (ss *statestack) Top() (rv *state, ok bool) {
 	sp := *ss
 
 	if n := len(sp); n > 0 {
-		rv, ok = &sp[n-1], true
+		rv, ok = sp[n-1], true
 	}
 
 	return
