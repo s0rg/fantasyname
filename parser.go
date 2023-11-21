@@ -33,13 +33,20 @@ func newParser(opts ...Option) (p *parser) {
 
 	p = &parser{conf: c}
 
-	p.stack.Push(state{rndfn: p.conf.RandIntN}) // "root" state
+	// "root" state
+	p.stack.Push(&state{
+		rand: p.conf.RandIntN,
+	})
 
 	return p
 }
 
 func (p *parser) OnGroupStart(isLiteral bool) {
-	p.stack.Push(state{IsGroup: true, IsLiteral: isLiteral, rndfn: p.conf.RandIntN})
+	p.stack.Push(&state{
+		IsGroup:   true,
+		IsLiteral: isLiteral,
+		rand:      p.conf.RandIntN,
+	})
 }
 
 func (p *parser) OnGroupEnd(isLiteral bool) (err error) {

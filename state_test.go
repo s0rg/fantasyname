@@ -50,7 +50,7 @@ func TestStateLiteralWrap(t *testing.T) {
 func TestStateLiteralGroupSplitNotEmpty(t *testing.T) {
 	t.Parallel()
 
-	s := state{IsGroup: true, IsLiteral: true, rndfn: rand.Intn}
+	s := state{IsGroup: true, IsLiteral: true, rand: rand.Intn}
 	s.Add(stringers.Literal("a"))
 	s.Add(stringers.Literal("c"))
 	s.Split()
@@ -70,7 +70,7 @@ func TestStateLiteralGroupSplitNotEmpty(t *testing.T) {
 func TestStateLiteralGroupSplitEmpty(t *testing.T) {
 	t.Parallel()
 
-	s := state{IsGroup: true, IsLiteral: true, rndfn: rand.Intn}
+	s := state{IsGroup: true, IsLiteral: true, rand: rand.Intn}
 	s.Split()
 	s.Add(stringers.Literal("a"))
 	s.Split()

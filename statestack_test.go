@@ -25,7 +25,7 @@ func TestStateStackPushPop(t *testing.T) {
 
 	stack := statestack{}
 
-	stack.Push(state{IsLiteral: true})
+	stack.Push(&state{IsLiteral: true})
 
 	if len(stack) != 1 {
 		t.Error("unexpected len")

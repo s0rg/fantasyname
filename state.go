@@ -9,7 +9,7 @@ import (
 type wrapper func(fmt.Stringer) fmt.Stringer
 
 type state struct {
-	rndfn     func(int) int
+	rand      func(int) int
 	items     []fmt.Stringer
 	wrappers  []wrapper
 	splitpos  int
@@ -19,7 +19,7 @@ type state struct {
 
 func (s *state) Add(v fmt.Stringer) {
 	if !s.IsGroup {
-		v = s.withWrappers(v)
+		v = s.applyWrappers(v)
 	}
 
 	s.items = append(s.items, v)
@@ -60,15 +60,15 @@ func (s *state) Stringer() (rv fmt.Stringer) {
 	case len(s.items) == 1:
 		rv = s.items[0]
 	case s.IsGroup:
-		rv = stringers.MakeRandom(s.items, s.rndfn)
+		rv = stringers.MakeRandom(s.items, s.rand)
 	default:
 		rv = stringers.Sequence(s.items)
 	}
 
-	return s.withWrappers(rv)
+	return s.applyWrappers(rv)
 }
 
-func (s *state) withWrappers(v fmt.Stringer) (rv fmt.Stringer) {
+func (s *state) applyWrappers(v fmt.Stringer) (rv fmt.Stringer) {
 	rv = v
 
 	if len(s.wrappers) > 0 {
