@@ -15,7 +15,7 @@ func Collapsed(s fmt.Stringer) fmt.Stringer {
 
 func (cl *collapser) String() string {
 	var (
-		max, cnt  int
+		top, cnt  int
 		cur, prev rune
 		rres      = []rune(cl.s.String())
 		rout      = make([]rune, 0, len(rres))
@@ -28,13 +28,13 @@ func (cl *collapser) String() string {
 			cnt = 0
 		}
 
-		max = 2
+		top = 2
 
 		if needCollapse(cur) {
-			max = 1
+			top = 1
 		}
 
-		if cnt < max {
+		if cnt < top {
 			rout = append(rout, cur)
 		}
 
