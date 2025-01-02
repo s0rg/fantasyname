@@ -44,6 +44,10 @@ func main() {
 
 You can run it with `go run _example/main.go` to see results.
 
+# ready-to-use cli app
+
+Created by [TLINDEN](https://github.com/TLINDEN/): [gfn](https://github.com/TLINDEN/gfn)
+
 # pattern syntax
 
 The letters `s`, `v`, `V`, `c`, `B`, `C`, `i`, `m`, `M`, `D`, and `d` represent different types of random replacements:
