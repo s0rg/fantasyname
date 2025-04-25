@@ -6,8 +6,8 @@
 
 [![CI](https://github.com/s0rg/fantasyname/workflows/ci/badge.svg)](https://github.com/s0rg/fantasyname/actions?query=workflow%3Aci)
 [![Go Report Card](https://goreportcard.com/badge/github.com/s0rg/fantasyname)](https://goreportcard.com/report/github.com/s0rg/fantasyname)
-[![Maintainability](https://api.codeclimate.com/v1/badges/95826f2eb57b89cefe70/maintainability)](https://codeclimate.com/github/s0rg/fantasyname/maintainability)
-[![Test Coverage](https://api.codeclimate.com/v1/badges/95826f2eb57b89cefe70/test_coverage)](https://codeclimate.com/github/s0rg/fantasyname/test_coverage)
+[![Maintainability](https://qlty.sh/badges/09a35bec-e65e-4587-a845-4ba6982fd69f/maintainability.svg)](https://qlty.sh/gh/s0rg/projects/fantasyname)
+[![Code Coverage](https://qlty.sh/badges/09a35bec-e65e-4587-a845-4ba6982fd69f/test_coverage.svg)](https://qlty.sh/gh/s0rg/projects/fantasyname)
 ![Issues](https://img.shields.io/github/issues/s0rg/fantasyname)
 
 # fantasyname
