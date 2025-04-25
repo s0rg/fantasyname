@@ -1,5 +1,7 @@
 module github.com/s0rg/fantasyname
 
-go 1.23
+go 1.24
 
-require golang.org/x/text v0.21.0
+toolchain go1.24.2
+
+require golang.org/x/text v0.24.0
