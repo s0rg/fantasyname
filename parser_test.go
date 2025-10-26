@@ -10,10 +10,9 @@ import (
 func TestParserErrors(t *testing.T) {
 	t.Parallel()
 
-	var (
-		p = &parser{}
-		e error
-	)
+	var e error
+
+	p := &parser{}
 
 	if e = p.OnGroupEnd(true); e == nil {
 		t.Error("group end: no error")
